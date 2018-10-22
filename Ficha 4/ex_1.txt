@@ -1,0 +1,157 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define PI 3.14
+
+
+// Declarar Funções
+int leNumero(void);                             // Ler Numero
+float areaTriangulo(int base, int altura);      // Area do Triangulo
+float areaRetangulo(int c, int l);              // Area Retangulo
+float areaQuadrado(int l);                      // Area Quadrado
+float areaCirculo(int r);                       // Area Circulo
+char menu(int r, int t, int q, int c);          // Menu
+void leDadosTriangulo(int *b, int *a);         // Ler Dados Triangulo
+
+// Função Principal
+int main()
+{
+    int lado1=0, lado2=0, base_T=0, altura_T=0;
+    int res1;
+    float res, area, contR=0, contT=0, contQ=0, contC=0;
+    char opcao;
+
+    do
+    {
+        opcao = menu(contR, contT, contQ, contC);
+
+        switch(opcao)
+        {
+        case 'R':
+            lado1 = leNumero();
+            lado2 = leNumero();
+            area = areaRetangulo(lado1, lado2);
+            contR++;
+            printf("Area Retangulo: %.2f", area);
+            printf("\nContador Retangulo: %.2f\n\n", contR);
+            break;
+        case 'Q':
+            lado1 = leNumero();
+            area = areaQuadrado(lado1);
+            contQ++;
+            printf("Area Quadrado: %.2f", area);
+            printf("\nContador Quadrado: %.2f\n\n", contQ);
+            break;
+        case 'T':
+            //lado1 = leNumero();
+            //lado2 = leNumero();
+
+            //printf("\nFORA\nBASE_T:%d\nAREA_T:%d", base_T, altura_T);     // Debug
+
+            leDadosTriangulo(&base_T, &altura_T);
+
+            area = areaTriangulo(base_T, altura_T);
+            contT++;
+            printf("Area Triangulo: %.2f", area);
+            printf("\nContador Triangulo: %.2f\n\n", contT);
+            break;
+        case'C':
+                lado1 = leNumero();
+            area = areaCirculo(lado1);
+            contC++;
+            printf("Area Circulo: %.2f", area);
+            printf("\nContador Circulo: %.2f\n\n", contR);
+            break;
+        case'F':
+                printf("\nAdeus!!!\n\n");
+        }
+    }
+    while(opcao!= 'F');
+
+    return 0;
+}
+
+// Ler Numero Positivo
+int leNumero(void)
+{
+    int num;
+    do
+    {
+        printf("Insira o Numero:");
+        scanf("%d", &num);
+        if(num<=0)
+        {
+            printf("Numero Invalido!!!!\n\n");
+        }
+    }
+    while(num<=0);
+
+    return num;
+}
+
+// Area do Triangulo
+float areaTriangulo(int base, int altura)
+{
+    float resultado = (float)(base * altura)/2;;
+    return resultado;
+}
+
+// Area do Retangulo
+float areaRetangulo(int c, int l)
+{
+    float resultado = c*l;
+    return resultado;
+}
+
+// Area do Quadrado
+float areaQuadrado(int l)
+{
+    float resultado = l*l;
+    return resultado;
+}
+
+// Area do Circulo
+float areaCirculo(int r)
+{
+    float resultado = PI * r * r;
+    return resultado;
+}
+
+// Menu
+char menu(int r, int t, int q, int c)
+{
+    char op;
+    printf("\n\t\t\t\tCalculo de Areas");
+    printf("\nTriangulo(N):%d\t\t\t\tRetangulo(N):%d", t, r);
+    printf("\nCirculo(N):%d\t\t\t\Quadrado(N):%d", c, q);
+    printf("\n\nOPCOES");
+    printf("\n\t(T)riangulo");
+    printf("\n\t(R)retangulo");
+    printf("\n\t(Q)uadrado");
+    printf("\n\t(C)irculo");
+    printf("\n\t(F)im");
+    printf("\n\nSelecione opcao:");
+
+    do
+    {
+        scanf(" %c", &op);
+        op = toupper(op);
+        if (op!='T' && op!='R' && op!='Q' && op!='C' && op!='F')
+            printf("Opcao Invalida \n");
+    }
+    while (op!='T' && op!='R' && op!='Q' && op!='C' && op!='F');
+    return op;
+}
+
+// Ler Dados do Triangulo
+void leDadosTriangulo(int *b, int *a)
+{
+    //printf("\nDENTRO DA FUNCAO!\na:%d\tb:%d\n", *a, *b);          // Debug
+    printf("Insira a Base do Triangulo:");
+    scanf("%d", b);
+    printf("\nDENTRO DA FUNCAO!\na:%d\tb:%d\n", *a, *b);          // Debug
+    printf("Insira a Altura do Triangulo:");
+    scanf("%d", a);
+    printf("\nDENTRO DA FUNCAO!\na:%d\tb:%d\n", *a, *b);          // Debug
+}
+
